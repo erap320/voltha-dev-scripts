@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#Kill old commands
+ps -ao pid,args | grep port-forward | grep -v grep | awk '{print $1}' | ifne xargs kill
+
+#Port forward
+kubectl port-forward -n infra svc/voltha-infra-onos-classic-hs 8101 &
+kubectl port-forward -n infra svc/voltha-infra-onos-classic-hs 8181 &
+kubectl -n voltha port-forward svc/voltha-voltha-api 55555 &

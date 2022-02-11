@@ -1,0 +1,4 @@
+#!/bin/bash
+
+voltctl device list --filter Type~openolt -q | xargs voltctl device disable
+voltctl device list --filter Type~openolt -q | xargs voltctl device delete

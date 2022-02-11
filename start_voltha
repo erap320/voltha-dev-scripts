@@ -1,0 +1,10 @@
+#!/bin/bash
+
+helm upgrade --install --create-namespace \
+	  -n voltha voltha onf/voltha-stack \
+	  --set global.stack_name=voltha \
+	  --set voltha_infra_name=voltha-infra \
+	  --set voltha_infra_namespace=infra \
+	  --set global.image_pullPolicy=Always \
+	  --set global.image_tag=master \
+	  --set global.log_level=DEBUG

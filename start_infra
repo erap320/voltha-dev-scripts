@@ -1,0 +1,3 @@
+#!/bin/bash
+
+helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra --set onos-classic.image.tag=master

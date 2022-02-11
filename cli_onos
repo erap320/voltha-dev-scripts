@@ -1,0 +1,3 @@
+#!/bin/bash
+
+kubectl -n infra exec -it voltha-infra-onos-classic-0 -- bash /root/onos/apache-karaf-4.2.14/bin/client

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "container tag missing"
+        exit 1
+fi
+
+cd $HOME/git/bbsim
+DOCKER_REGISTRY="erap320/" DOCKER_TAG="$1" make docker-build
+kind load docker-image erap320/bbsim:$1
+helm upgrade --install -n voltha bbsim0 onf/bbsim --set olt_id=10 --set images.bbsim.repository=erap320/bbsim,images.bbsim.tag=$1,images.bbsim.pullPolicy=Never

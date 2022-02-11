@@ -1,0 +1,8 @@
+#!/bin/bash
+voltctl logicaldevice list -q | echo -e "logicaldevice" >> $1
+voltctl logicaldevice list -q | xargs voltctl logicaldevice flows >> $1
+voltctl device list --filter Type~openolt -q | xargs echo -e "\nOLT" >> $1
+voltctl device list --filter Type~openolt -q | xargs voltctl device flows >> $1
+voltctl device list --filter Type~brcm_openomci_onu -q | xargs  echo -e "\nONU" >> $1
+voltctl device list --filter Type~brcm_openomci_onu -q | xargs voltctl device flows >> $1
+echo -e "\n--------------------------\n" >> $1
