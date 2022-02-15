@@ -8,15 +8,15 @@ fi
 
 #Build voltha
 cd $HOME/git/voltha-go
-DOCKER_REGISTRY="erap320/" DOCKER_TAG="$1" make docker-build
+DOCKER_REGISTRY="$USER/" DOCKER_TAG="$1" make docker-build
 
 #Build openolt
 cd $HOME/git/voltha-openolt-adapter
-DOCKER_REGISTRY="erap320/" DOCKER_TAG="$1" make docker-build
+DOCKER_REGISTRY="$USER/" DOCKER_TAG="$1" make docker-build
 
 #Load both in kind
-kind load docker-image erap320/voltha-rw-core:$1
-kind load docker-image erap320/voltha-openolt-adapter:$1
+kind load docker-image $USER/voltha-rw-core:$1
+kind load docker-image $USER/voltha-openolt-adapter:$1
 
 helm upgrade --install --create-namespace \
 	  -n voltha voltha onf/voltha-stack \
@@ -26,9 +26,9 @@ helm upgrade --install --create-namespace \
 	  --set global.image_pullPolicy=Always \
 	  --set global.image_tag=master \
 	  --set global.log_level=DEBUG \
-	  --set voltha.images.rw_core.repository=erap320/voltha-rw-core \
+	  --set voltha.images.rw_core.repository=$USER/voltha-rw-core \
   	  --set voltha.images.rw_core.tag=$1 \
 	  --set voltha.images.rw_core.pullPolicy=Never \
-	  --set voltha-adapter-openolt.images.adapter_open_olt.repository=erap320/voltha-openolt-adapter \
+	  --set voltha-adapter-openolt.images.adapter_open_olt.repository=$USER/voltha-openolt-adapter \
   	  --set voltha-adapter-openolt.images.adapter_open_olt.tag=$1 \
 	  --set voltha-adapter-openolt.images.adapter_open_olt.pullPolicy=Never

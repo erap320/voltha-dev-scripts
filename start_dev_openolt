@@ -7,8 +7,8 @@ if [ -z "$1" ]
 fi
 
 cd $HOME/git/voltha-openolt-adapter
-DOCKER_REGISTRY="erap320/" DOCKER_TAG="$1" make docker-build
-kind load docker-image erap320/voltha-openolt-adapter:$1
+DOCKER_REGISTRY="$USER/" DOCKER_TAG="$1" make docker-build
+kind load docker-image $USER/voltha-openolt-adapter:$1
 helm upgrade --install --create-namespace \
 	  -n voltha voltha onf/voltha-stack \
 	  --set global.stack_name=voltha \
@@ -17,6 +17,6 @@ helm upgrade --install --create-namespace \
 	  --set global.image_pullPolicy=Always \
 	  --set global.image_tag=master \
 	  --set global.log_level=DEBUG \
-	  --set voltha-adapter-openolt.images.adapter_open_olt.repository=erap320/voltha-openolt-adapter \
+	  --set voltha-adapter-openolt.images.adapter_open_olt.repository=$USER/voltha-openolt-adapter \
   	  --set voltha-adapter-openolt.images.adapter_open_olt.tag=$1 \
 	  --set voltha-adapter-openolt.images.adapter_open_olt.pullPolicy=Never
