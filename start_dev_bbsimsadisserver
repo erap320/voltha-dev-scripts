@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "container tag missing"
+        exit 1
+fi
+
+cd $HOME/git/bbsim-sadis-server
+DOCKER_REGISTRY="$USER/" DOCKER_TAG="$1" make docker-build
+kind load docker-image $USER/bbsim-sadis-server:$1
+helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra --set onos-classic.image.tag=master --set bbsim-sadis-server.images.bbsim_sadis_server.repository=erap320/bbsim-sadis-server --set bbsim-sadis-server.images.bbsim_sadis_server.tag=sadis --set bbsim-sadis-server.images.bbsim_sadis_server.pullPolicy=Never
