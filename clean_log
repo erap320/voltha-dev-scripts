@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "log file path missing"
+        exit 1
+fi
+
+sed -i "/voltha-infra-voltha-tracing-jaeger/d" $1
+sed -i "s,\x1B\[[0-9;]*[a-zA-Z],,g" $1
