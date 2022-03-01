@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "container tag missing"
+        exit 1
+fi
+
+cd $HOME/git/bbsim
+DOCKER_REGISTRY="$USER/" DOCKER_TAG="$1" make docker-build
+kind load docker-image $USER/bbsim:$1

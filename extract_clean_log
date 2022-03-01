@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "log archive path missing"
+        exit 1
+fi
+
+#Extract log file
+gzip -d $1
+
+#Get file name
+filename=$1
+filename="${filename%.*}"
+
+#Clean log
+clean_log $filename

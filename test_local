@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "test target missing"
+        exit 1
+fi
+
+cd $HOME/git/voltha-system-tests
+VOLTCONFIG="$HOME/git/voltctl/voltctl.config" ROBOT_MISC_ARGS="-v INFRA_NAMESPACE:infra -v container_log_dir:$HOME/logs/robot -v logging:True -d $HOME/logs/robot" make $1

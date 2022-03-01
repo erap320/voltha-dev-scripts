@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "container tag missing"
+        exit 1
+fi
+
+cd $HOME/git/voltha-northbound-bbf-adapter
+DOCKER_REGISTRY="$USER/" DOCKER_TAG="$1" make docker-build
+kind load docker-image $USER/voltha-northbound-bbf-adapter:$1
+
+helm upgrade --install --create-namespace -n infra bbf $HOME/git/voltha-helm-charts/voltha-northbound-bbf-adapter/ \
+            --set images.voltha_northbound_bbf_adapter.repository=$USER/voltha-northbound-bbf-adapter \
+            --set images.voltha_northbound_bbf_adapter.tag=$1,images.voltha_northbound_bbf_adapter.pullPolicy=Never \
+            --set global.log_level=DEBUG
