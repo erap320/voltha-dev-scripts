@@ -1,0 +1,4 @@
+#!/bin/bash
+
+#Kill old commands
+ps -ao pid,args | grep port-forward | grep -v grep | awk '{print $1}' | ifne xargs kill

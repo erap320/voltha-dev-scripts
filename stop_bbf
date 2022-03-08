@@ -1,2 +1,2 @@
 #!/bin/bash
-helm delete -n infra bbf
+helm delete -n voltha bbf

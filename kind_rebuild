@@ -7,4 +7,4 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 kind get kubeconfig > $HOME/.kube/config
 
 #Start deploying infra, which takes a long time to complete
-helm upgrade --install --create-namespace -n infra voltha-infra onf/voltha-infra --set onos-classic.image.tag=master
+start_infra

@@ -1,4 +1,11 @@
 #!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "output file missing"
+        exit 1
+fi
+
 voltctl logicaldevice list -q | echo -e "logicaldevice" >> $1
 voltctl logicaldevice list -q | xargs voltctl logicaldevice flows >> $1
 voltctl device list --filter Type~openolt -q | xargs echo -e "\nOLT" >> $1
