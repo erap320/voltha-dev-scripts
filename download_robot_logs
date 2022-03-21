@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "artifacts url"
+        exit 1
+fi
+
+url=$1
+
+#Go back in the url to the artifact dir
+while [ $(basename $url) != "artifact" ] && [ $(basename $url) != "." ]
+do
+    url=$(dirname $url)
+done
+
+if [ $(basename $url) == "." ]
+then
+    echo "> Not an artifact url"
+    exit 1
+fi
+
+#Pop another one to get to the test number
+number=$(dirname $url | xargs basename)
+cd $number
+
+#Download the zip here
+if [ $(basename $1) == "artifact" ]
+then
+    name="archive"
+else
+    name=$(basename $1)
+fi
+
+archive="$1/*zip*/$name.zip"
+
+wget $archive -O logs.zip
+unzip logs.zip
+rm logs.zip
+
+#Rename the folder with the test number
+mv $name $number

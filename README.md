@@ -14,11 +14,15 @@ Apart from particular scripts, you can expect:
 ### Everything else
 
 ```
+build_bbf (tag)
+    executes docker-build for the voltha-northbound-bbf-adapter and loads the image on kind nodes
+
 build_bbsim (tag)
     executes docker-build for bbsim and loads the image on kind nodes
 
 clean_log (path)
-    removes errors due to the jaeger host not being found, and strips bash color codes that are not displayed properly in IDEs from ONOS logs
+    removes errors due to the jaeger host not being found, and strips bash color codes
+    that are not displayed properly in IDEs from ONOS logs
 
 cli_onos
     opens ONOS CLI by executing it in the container
@@ -26,8 +30,15 @@ cli_onos
 disable_delete_olt
     disables and deletes the OLT with voltctl
 
+download_robot_logs (url)
+    downloads and extracts the artifacts from an artifact folder link from jenkins.opencord.org,
+    creating a directory with the name of the test number for better organization
+
 enable_olt
     provisions and enables a BBSIM OLT
+
+exec_bbf
+    opens bash in the container of the voltha-northbound-bbf-adapter to use sysrepoctl
 
 exec_bbsim
     opens bash in the container of bbsim to let you use bbsimctl
@@ -36,10 +47,12 @@ extract_clean_log (path)
     takes a .tar.gz log file from robot tests, extracts it in place and cleans it with clean_log 
 
 git-graph
-    can be executed with 'git graph' too, prints a visual representation of the commit history for the current branch
+    can be executed with 'git graph' too, prints a visual representation of the commit history for
+    the current branch
 
 kind_rebuild
-    restarts a kind cluster and starts infra, which takes a lot of time to set up. Assumes you have a $HOME/kind-cfg/3-node-cfg.yaml file
+    restarts a kind cluster and starts infra, which takes a lot of time to set up. Assumes you have
+    a $HOME/kind-cfg/3-node-cfg.yaml file
 
 kubernetes_status
     runs watch kubectl get pods -A
@@ -60,22 +73,28 @@ start_bbsim
     installs the master on the cluster
 
 start_dev_bbf (tag)
-    executes docker-build with the provided tag, loads the image on the kind nodes, and installs this local version on the cluster
+    executes docker-build with the provided tag, loads the image on the kind nodes, and installs this
+    local version on the cluster
 
 start_dev_bbsim (tag)
-    executes docker-build with the provided tag, loads the image on the kind nodes, and installs this local version on the cluster
+    executes docker-build with the provided tag, loads the image on the kind nodes, and installs this
+    local version on the cluster
 
 start_dev_bbsimsadisserver (tag)
-    executes docker-build with the provided tag, loads the image on the kind nodes, and installs this local version on the cluster
+    executes docker-build with the provided tag, loads the image on the kind nodes, and installs this
+    local version on the cluster
 
 start_dev_openolt (tag)
-    executes docker-build for openolt-adapter with the provided tag, loads the image on the kind nodes, and installs the voltha stack with this local version on the cluster
+    executes docker-build for openolt-adapter with the provided tag, loads the image on the kind nodes,
+    and installs the voltha stack with this local version on the cluster
 
 start_dev_voltha (tag)
-    executes docker-build for voltha-go with the provided tag, loads the image on the kind nodes, and installs the voltha stack with this local version on the cluster
+    executes docker-build for voltha-go with the provided tag, loads the image on the kind nodes, and
+    installs the voltha stack with this local version on the cluster
 
 start_dev_volthaplusopenolt (tag)
-    executes docker-build for openolt-adapter and voltha-go with the provided tag, loads the image on the kind nodes, and installs the voltha stack with this local version on the cluster
+    executes docker-build for openolt-adapter and voltha-go with the provided tag, loads the image on
+    the kind nodes, and installs the voltha stack with this local version on the cluster
 
 start_infra
     installs the master on the cluster
@@ -102,7 +121,8 @@ stop_voltha
     delete voltha from the cluster
 
 test_local (target)
-    locally run a test target from voltha-system-tests with some additional parameters. Logs will go to $HOME/logs/robot
+    locally run a test target from voltha-system-tests with some additional parameters. Logs will go
+    to $HOME/logs/robot
 
 uncolor
     if the output of a program is piped through this script, it will strip bash color codes from it
