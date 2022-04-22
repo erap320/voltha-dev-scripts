@@ -1,0 +1,3 @@
+#!/bin/bash
+
+helm upgrade --install --create-namespace -n voltha1 voltha1 onf/voltha-stack --set global.stack_name=voltha1 --set global.voltha_infra_name=voltha-infra --set global.voltha_infra_namespace=infra --set global.image_tag=master --set voltha.replicas.ofagent=0

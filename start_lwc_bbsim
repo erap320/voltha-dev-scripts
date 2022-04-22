@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+    then
+        echo "values file missing"
+        exit 1
+fi
+
+helm upgrade --install -n voltha1 bbsim onf/bbsim --set global.image_tag=master --set olt_id=10 -f $1

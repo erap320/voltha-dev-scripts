@@ -1,0 +1,4 @@
+#!/bin/bash
+
+uuid=$(grpcurl -plaintext -d '{"name": "SomeOlt","uri": {"uri":"bbsim0.voltha.svc"}}' localhost:50075 dmi.NativeHWManagementService/StartManagingDevice | jq .deviceUuid.uuid)
+grpcurl -plaintext -d "{\"device_uuid\": {\"uuid\": ${uuid} }}" localhost:50075 dmi.NativeHWManagementService.GetPhysicalInventory

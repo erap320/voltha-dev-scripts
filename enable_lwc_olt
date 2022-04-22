@@ -1,0 +1,4 @@
+#!/bin/bash
+
+voltctl device create -t openolt -H bbsim.voltha1.svc:50060
+voltctl device list --filter Type~openolt -q | xargs voltctl device enable

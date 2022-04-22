@@ -1,0 +1,5 @@
+#!/bin/bash
+
+helm delete -n voltha1 bbsim
+helm delete -n voltha1 voltha1
+helm delete -n infra voltha-infra

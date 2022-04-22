@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#Kill old commands
+ps -ao pid,args | grep port-forward | grep -v grep | awk '{print $1}' | ifne xargs kill
+
+#Port forward
+bash -c "while true; do kubectl -n infra port-forward svc/lwc 8181; done" &
+bash -c "while true; do kubectl -n voltha1 port-forward svc/voltha1-voltha-api 55555; done" &

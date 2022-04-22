@@ -1,2 +1,2 @@
 #!/bin/bash
-kubectl -n voltha exec -it $(kubectl -n voltha get pods -l app=bbf-adapter -o name) -- /bin/bash
+kubectl -n voltha exec -it $(kubectl -n voltha get pods -l app=bbf-adapter -o name) -- /bin/ash
